@@ -77,7 +77,7 @@ In particular, one needs to specify a chosen significance level for a statistica
 ### Program Specification and Test Cases
 
 #### testCases.py 
-In this file, one can specify the test cases to be executed by Muskit on mutants. A test case is simply the initialization of circuit. A sample is available <a href="/QuantumMutation/testCases.py">here</a>
+In this file, one can specify the test cases to be executed by Muskit on mutants. A test case is simply the initialization of circuit. A sample is available <a href="/Muskit/testCases.py">here</a>
 
 For example, the format for a program with three qubits is:
 ```inputs = ("001","101","110")```
