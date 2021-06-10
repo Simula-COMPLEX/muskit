@@ -1,0 +1,6 @@
+pytest
+jinja2
+pytz
+simplegeneric
+tzlocal
+cffi>=1.0.0
