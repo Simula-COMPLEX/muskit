@@ -1,6 +1,5 @@
 # Muskit: A Mutation Analysis Tool for Quantum Software Testing
 
-<img src="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/images/logoblue.png" width="200">
 
 <img src="/images/logoblue.png" width="200">
 
@@ -20,7 +19,7 @@ and here
 A preprint of the paper describing Muskit and its features can be download from <a href="">here</a>.
 -->
 
-<img src="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/images/architecture.png" width="500">
+<img src="/images/architecture.png" width="500">
 
 # Extension
 Muskit can be extended in two ways: 
@@ -33,7 +32,7 @@ Muskit can be extended in two ways:
 - The qubits should be declared once.
 - In order to measure all the qubits correctly, an equal number of classical bits must be defined.
 
-A sample circuit for Quantum Random Access Memory (QRAM) is available <a href="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/Example/QRAM_program.py">here</a>.
+A sample circuit for Quantum Random Access Memory (QRAM) is available <a href="/Example/QRAM_program.py">here</a>.
 
 ### Configuration Files
 The main configuration files are described below. Note that within each file, we list the required variables and their possible valid values.
@@ -41,7 +40,7 @@ The main configuration files are described below. Note that within each file, we
 #### QuantumGate.py
 QuantumGate.py has two purposes:
 1) configuring Muskit to use quantum gates in MutantsGenerator;
-2) specifying newly implemented gates to be used by Muskit. A sample file is available <a href="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/QuantumMutation/QuantumGates.py">here</a>
+2) specifying newly implemented gates to be used by Muskit. A sample file is available <a href="/QuantumMutation/QuantumGates.py">here</a>
 
 One can specify the gates in the following five categories:
 
@@ -55,7 +54,7 @@ A user can consult Qiskit documentation to read the description of each of the g
 
 #### generatorConfig.py
 
-This configuration file provides instructions to the MutantsGenerator component. A sample file is available <a href="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/QuantumMutation/generatorConfig.py">here</a>.
+This configuration file provides instructions to the MutantsGenerator component. A sample file is available <a href="/QuantumMutation/generatorConfig.py">here</a>.
 
 In particular, it allows the user to specify various selection criteria that will be taken into account while generating mutants. Possible options are:
 1) selecting all mutants;
@@ -66,26 +65,26 @@ In particular, it allows the user to specify various selection criteria that wil
 6) selecting particular locations to add new gates.
 
 #### executorConfig.py
-- This configuration provides instructions to the MutantsExecutor component that will be taken into account for executing the mutants. A sample file is available <a href=https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/QuantumMutation/executorConfig.py>here </a>.
+- This configuration provides instructions to the MutantsExecutor component that will be taken into account for executing the mutants. A sample file is available <a href=/QuantumMutation/executorConfig.py>here </a>.
 
 In particular, one can specify the number of times a test case must be executed to account for probabilistic nature of quantum programs. Also, a user can set a variable, i.e., allInputs to true, if the user does not have the test cases to be executed. In this case, a mutant will be executed with all possible inputs, i.e., All Input Coverage criteria. If this variable is set to false, then a user must specify test cases in testcase.py file.
 
 #### analyzerConfig.py
-This is a configuration file for Test Analyzer. A sample file for the QRAM program is available <a href="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/Example/analyzerConfig.py">here</a>.
+This is a configuration file for Test Analyzer. A sample file for the QRAM program is available <a href="/Example/analyzerConfig.py">here</a>.
 
 In particular, one needs to specify a chosen significance level for a statistical test, e.g., p-value=0.05. In addition, a user also has to specify the qubits that should be used as inputs and also the qubits that should be measured. 
 
 ### Program Specification and Test Cases
 
 #### testCases.py 
-In this file, one can specify the test cases to be executed by Muskit on mutants. A test case is simply the initialization of circuit. A sample is available <a href="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/QuantumMutation/testCases.py">here</a>
+In this file, one can specify the test cases to be executed by Muskit on mutants. A test case is simply the initialization of circuit. A sample is available <a href="/QuantumMutation/testCases.py">here</a>
 
 For example, the format for a program with three qubits is:
 ```inputs = ("001","101","110")```
 where we have three test case 001, 101, and 110 that will be used for testing.
 
 #### ProgramSpecifications 
-This file is required for test analyzer to determine killing of a mutant with a test case. A sample file corresponding to QRAM is available <a href="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/Example/QR_program_specification.txt">here</a>.
+This file is required for test analyzer to determine killing of a mutant with a test case. A sample file corresponding to QRAM is available <a href="/Example/QR_program_specification.txt">here</a>.
 Simply, we specify, for each input its corresponding outputs with their associated expected probabilities. 
 
 To determine whether a mutant is killed, Muskit implements two types of test oracles from <a href="https://ieeexplore.ieee.org/abstract/document/9438603">Quito</a>:
@@ -132,7 +131,7 @@ The GUI version can be run as follows: ```python3 Muskit/GraphicMain.py```
 
 A screenshot of the GUI is available below:
 
-<img src="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/images/gui.png" width="600">
+<img src="/images/gui.png" width="600">
 
 When using the GUI, please note that a user has to follow a step-wise process, which will only enable the options valid at that step to avoid crashing the software.  
 
@@ -167,7 +166,7 @@ The online only allows a user to generate mutants and execution is not supported
 
 A screenshot is available here:
 
-<img src="https://github.com/EnautMendi/QuantumMutationQiskit/blob/master/images/web.png" width="600">
+<img src="/images/web.png" width="600">
 
 # Video Demonstration
 Video demo is available <a href=""> here</a>.
