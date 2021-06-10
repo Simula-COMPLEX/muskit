@@ -169,7 +169,7 @@ A screenshot is available here:
 <img src="/images/web.png" width="600">
 
 # Video Demonstration
-Video demo is available <a href=""> here</a>.
+Video demo is available <a href="https://www.youtube.com/watch?v=EbPHJOK_AEA"> here</a>.
 
 # Experimental Data
 Experimental data including quantum programs, and program specifications can be downloaded <a href="/Experimental%20Data">here</a>. 
