@@ -40,7 +40,7 @@ The main configuration files are described below. Note that within each file, we
 #### QuantumGate.py
 QuantumGate.py has two purposes:
 1) configuring Muskit to use quantum gates in MutantsGenerator;
-2) specifying newly implemented gates to be used by Muskit. A sample file is available <a href="/QuantumMutation/QuantumGates.py">here</a>
+2) specifying newly implemented gates to be used by Muskit. A sample file is available <a href="/Muskit/QuantumGates.py">here</a>
 
 One can specify the gates in the following five categories:
 
@@ -54,7 +54,7 @@ A user can consult Qiskit documentation to read the description of each of the g
 
 #### generatorConfig.py
 
-This configuration file provides instructions to the MutantsGenerator component. A sample file is available <a href="/QuantumMutation/generatorConfig.py">here</a>.
+This configuration file provides instructions to the MutantsGenerator component. A sample file is available <a href="/Muskit/generatorConfig.py">here</a>.
 
 In particular, it allows the user to specify various selection criteria that will be taken into account while generating mutants. Possible options are:
 1) selecting all mutants;
@@ -65,7 +65,7 @@ In particular, it allows the user to specify various selection criteria that wil
 6) selecting particular locations to add new gates.
 
 #### executorConfig.py
-- This configuration provides instructions to the MutantsExecutor component that will be taken into account for executing the mutants. A sample file is available <a href=/QuantumMutation/executorConfig.py>here </a>.
+- This configuration provides instructions to the MutantsExecutor component that will be taken into account for executing the mutants. A sample file is available <a href=/Muskit/executorConfig.py>here </a>.
 
 In particular, one can specify the number of times a test case must be executed to account for probabilistic nature of quantum programs. Also, a user can set a variable, i.e., allInputs to true, if the user does not have the test cases to be executed. In this case, a mutant will be executed with all possible inputs, i.e., All Input Coverage criteria. If this variable is set to false, then a user must specify test cases in testcase.py file.
 
