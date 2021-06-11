@@ -16,8 +16,8 @@ Mutants folder: It contains all the generated mutants.
 CE_program: It is the original program, whose mutants will be generated.
 CE_test_oracle: This file contains program specifications including oracles.
 results: contains the detailed results of execution for each mutant with All Input Coverage.
-cleanResults: contains the simplified results of execution.
-testResults: Contains the results of checking test oracles according to the program specifications.
+cleanResults: Contains the simplified results of execution.
+testResults: Contains the results of checking test oracles according to the program specifications with the two types of test oracles.
 
 ************************************************** 
 
