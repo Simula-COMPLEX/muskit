@@ -95,30 +95,39 @@ To determine whether a mutant is killed, Muskit implements two types of test ora
 # Muskit Installation
 
 - For offline installation, you can clone Muskit from this current GitHub repository, and then follow these steps:
-  - Install Anaconda. You can download Anaconda for your OS from https://www.anaconda.com/ For example, For macOS
+  - Install Anaconda. You can download Anaconda for your OS from https://www.anaconda.com/ For example, for macOS
     ```
     wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-MacOSX-x86_64.sh
-    bash Anaconda3-5.3.1-MacOSX-x86_64.sh```
+    bash Anaconda3-5.3.1-MacOSX-x86_64.sh
+    ```
   - Create conda environment: ```conda env create -f environments/yourOS.yml```
     - e.g., ```conda env create -f environments/mac.yml```
 - Alternatively, Muskit can be installed with pip as follows:
-  
-  ```pip install Muskit```
+  ```
+  pip install Muskit
+  ```
 
 # Muskit Implementations
 
 Muskit is available in the following three implementations described below.
 
 For command line and GUI version, you need to activate the conda environment as follows:
-
-```conda activate Muskit```
+```
+conda activate Muskit
+```
 
 
 ## Command Line
 The command line version has all the features supported and it is more flexible to be used for experimentation. In particular, the following two commands are used.
 
-- Mutants Generation: ```python3 CommandMain.py Create generatorConfig.py ${yourQuantumProgram}```
-- Mutants Execution: ```python3 CommandMain.py Execute executorConfig.py testCases.py ${mutant_1} ... ${mutant_n}```
+- Mutants Generation:
+  ```
+  python3 CommandMain.py Create generatorConfig.py ${yourQuantumProgram}
+  ```
+- Mutants Execution:
+  ```
+  python3 CommandMain.py Execute executorConfig.py testCases.py ${mutant_1} ... ${mutant_n}
+  ```
 
 The first command generates mutants for a provided circuit ${yourQuantumProgram}. Note that depending on the location of ${yourQuantumProgram}, one may need to provide the full path of the file. 
 The second command executes all the test cases specified in "testcases.py" on mutants ${mutant_1} ... ${mutant_n} provided as input.
@@ -127,7 +136,10 @@ Through the configuration files described above, users can configure both mutant
 
 ## GUI
 
-The GUI version can be run as follows: ```python3 Muskit/GraphicMain.py```
+The GUI version can be run as follows:
+```
+python3 Muskit/GraphicMain.py
+```
 
 A screenshot of the GUI is available below:
 
@@ -162,14 +174,14 @@ The online only allows a user to generate mutants and execution is not supported
     - all mutants;
     - set a limit on maximum number of mutants to be generated;
     - selection based on operator types (i.e., add, remove, or delete);
-    - selection based on gate types (one qubit or multiple qubit). 
+    - selection based on gate types (one qubit or multiple qubit).
 
 A screenshot is available here:
 
 <img src="/images/web.png" width="600">
 
 # Video Demonstration
-Video demo is available <a href="https://www.youtube.com/watch?v=EbPHJOK_AEA"> here</a>.
+Video demo is available <a href="https://www.youtube.com/watch?v=EbPHJOK_AEA">here</a>.
 
 
 # Experimental Data
