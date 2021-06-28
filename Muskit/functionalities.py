@@ -150,7 +150,7 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
             g.write("\n")
             g.write("r.write(r" + chr(34)+ "The result of " + files[x] + " with input [" + str(init) +"] is: " + chr(34) + " + str(counts))")
             g.write("\n")
-            g.write("r.write(r"+ chr(34) + chr(92) + "n"+ chr(34)+")")
+            g.write("r.write("+ chr(34) + chr(92) + "n"+ chr(34)+")")
             g.write("\n")
             g.write("r.close()")
             f.close()
