@@ -188,4 +188,5 @@ Video demo is available <a href="https://www.youtube.com/watch?v=EbPHJOK_AEA">he
 Experimental data including quantum programs, and program specifications can be downloaded <a href="/Experimental%20Data">here</a>. 
 
 
-
+## Paper
+E. Mendiluze, S. Ali, P. Arcaini, and T. Yue. Muskit: A Mutation Analysis Tool for Quantum Software Testing. In 36th IEEE/ACM International Conference on Automated Software Engineering - Tool Demonstrations track
