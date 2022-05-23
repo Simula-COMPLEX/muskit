@@ -189,4 +189,4 @@ Experimental data including quantum programs, and program specifications can be 
 
 
 ## Paper
-E. Mendiluze, S. Ali, P. Arcaini, and T. Yue. Muskit: A Mutation Analysis Tool for Quantum Software Testing. In 36th IEEE/ACM International Conference on Automated Software Engineering - Tool Demonstrations track
+E. Mendiluze, S. Ali, P. Arcaini, and T. Yue. Muskit: A Mutation Analysis Tool for Quantum Software Testing. In 36th IEEE/ACM International Conference on Automated Software Engineering - Tool Demonstrations track [[doi](https://doi.org/10.1109/ASE51524.2021.9678563)]
