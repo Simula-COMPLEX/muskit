@@ -2,6 +2,7 @@ import QuantumGates
 import random
 import os
 import platform
+import time
 
 
 def createMutants(maxNum, operators, types, gateIDs, locationIDs, originPath, savePath, all, phases):
@@ -94,9 +95,12 @@ def createInputs(QubitNum):
             binariInput = tmp + binariInput
         inputs = inputs + (binariInput,)
         x = x + 1
+        #FORCE ONLY ONE INPUT FOR TESTING
+        #x = x + 2 ** QubitNum
     return inputs[1:len(inputs)]
 
 def executeMutants(files, resultPath, numShots, allInputs, inputs):
+    start_time = time.time()
     splitChar = 92
     if chr(splitChar) not in resultPath:
         splitChar = 47
@@ -119,7 +123,7 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
             y=0
             while line != "":
                 g.write(line)
-                if "QuantumCircuit" in line:
+                if "QuantumCircuit(" in line:
                     g.write("\n")
                     z=1
                     while z <= len(init):
@@ -134,9 +138,15 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
                     str(CircuitName) + ".measure(" + str(QubitName) + "[" + str(y) + "], " + str(ClassicName) + "[" + str(y) + "])")
                 g.write("\n")
                 y = y + 1
-            g.write("simulator = Aer.get_backend('qasm_simulator')")
+
             g.write("\n")
-            g.write("job = execute(" + str(CircuitName) + ", simulator, shots=" + str(numShots) + ")")  ##execute for 10 times
+            #g.write("simulator = Aer.get_backend('qasm_simulator')") OLD VERSION !!!
+            g.write("simulator = AerSimulator()")
+            g.write("\n")
+            #g.write("job = execute(" + str(CircuitName) + ", simulator, shots=" + str(numShots) + ")")  OLD VERSION!!!
+            #g.write("compiled_circuit = transpile(" + str(CircuitName) + ", simulator)")
+            #g.write("\n")
+            g.write("job = simulator.run(" + str(CircuitName) + ", shots=" + str(numShots) + ")")
             g.write("\n")
             # Grab results from the job
             g.write("result = job.result()")
@@ -167,6 +177,7 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
             os.system(command)
             os.remove(tmpPath)
         x = x + 1
+    print("--- Execution time in seconds ---" + str(time.time() - start_time))
 
 
 def add(max, gateTypes, locations, origin, dirPath, phases):
@@ -412,7 +423,8 @@ def replace(num, gateTypes, changeGates, origin, dirPath, phases):
         CurrentGap = 0
         Mutated = False
         MutationNum = MutationNum + 1
-        newPath = dirPath + chr(splitChar) + str(MutationNum) + "ReplaceGate.py"
+        newPath = dirPath + chr(splitChar) + str(MutationNum) + "ReplaceGate_" + str(gateTypes[CurrentGate]) + "_inPositionOfGate_" + str(
+            ObjectiveGap) + ".py"
         f = open(origin)
         g = open(newPath, "w")
         line = f.readline()
@@ -671,19 +683,23 @@ def getInfo(origin):
     line = f.readline()
     GateNum = 0
     CircuitName = "Null"
-    QubitName = "Null"
-    ClasicName = "Null"
+    QubitName = ""
+    ClasicName = ""
+    QubitNum = 0
     while line != "":
-        if "QuantumRegister(" in line:
-            temp = line.split("(")
-            temp2 = temp[1].split(",")
-            temp2 = temp2[0].split(")")
-            temp3 = temp[0].split(" ")
-            QubitName = temp3[0]
-            QubitNum = int(temp2[0])
-        elif "QuantumCircuit(" in line:
+        #if "QuantumRegister(" in line:
+        #    temp = line.split("(")
+        #    temp2 = temp[1].split(",")
+        #    temp2 = temp2[0].split(")")
+        #    temp3 = temp[0].split(" ")
+        #    QubitName = temp3[0]
+        #    QubitNum = int(temp2[0])
+        if "QuantumCircuit(" in line:
             temp = line.split(" ")
             CircuitName = temp[0]
+            temp2 = temp[2].split('(')
+            temp3 = temp2[1].split(',')
+            QubitNum = int(temp3[0])
         elif (CircuitName in line) and CircuitName != "Null":
             temp = line.split(".",1)
             temp2 = temp[1].split("(")
