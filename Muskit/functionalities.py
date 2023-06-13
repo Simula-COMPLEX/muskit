@@ -154,15 +154,15 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
             # Returns counts
             g.write("counts = result.get_counts(" + str(CircuitName) + ")")
             g.write("\n")
-            g.write("print(counts)")
-            g.write("\n")
-            g.write("r = open(r" + chr(34) + (resultPath + chr(splitChar) + "results.txt") + chr(34) + ", " + chr(34)+ "a" + chr(34)+ ")")
-            g.write("\n")
-            g.write("r.write(r" + chr(34)+ "The result of " + files[x] + " with input [" + str(init) +"] is: " + chr(34) + " + str(counts))")
-            g.write("\n")
-            g.write("r.write("+ chr(34) + chr(92) + "n"+ chr(34)+")")
-            g.write("\n")
-            g.write("r.close()")
+            g.write("print(" + chr(34) + "The result of " + files[x] + " with input [" + str(init) +"] is: " + chr(34) + " + str(counts))")
+            #g.write("\n")
+            #g.write("r = open(r" + chr(34) + (resultPath + chr(splitChar) + "results.txt") + chr(34) + ", " + chr(34)+ "a" + chr(34)+ ")")
+            #g.write("\n")
+            #g.write("r.write(r" + chr(34)+ "The result of " + files[x] + " with input [" + str(init) +"] is: " + chr(34) + " + str(counts))")
+            #g.write("\n")
+            #g.write("r.write("+ chr(34) + chr(92) + "n"+ chr(34)+")")
+            #g.write("\n")
+            #g.write("r.close()")
             f.close()
             g.close()
             ops = platform.system()
@@ -177,7 +177,7 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
             os.system(command)
             os.remove(tmpPath)
         x = x + 1
-    print("--- Execution time in seconds ---" + str(time.time() - start_time))
+    print(" --- Execution time in seconds --- " + str(time.time() - start_time))
 
 
 def add(max, gateTypes, locations, origin, dirPath, phases):
