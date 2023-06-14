@@ -6,6 +6,16 @@ import time
 
 
 def createMutants(maxNum, operators, types, gateIDs, locationIDs, originPath, savePath, all, phases):
+    splitChar = 92
+    if chr(splitChar) not in originPath:
+        splitChar = 47
+
+    splited_origin_path = originPath.split(chr(splitChar))
+    file_name = splited_origin_path[-1]
+    file_name_splited = file_name.split('.')
+    name = file_name_splited[0]
+    savePath = savePath + chr(splitChar) + 'Mutants_' + name
+    os.mkdir(savePath)
     if all == True:
         info = getInfo(originPath)
         operators = ("Add", "Remove", "Replace")
