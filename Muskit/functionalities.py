@@ -48,6 +48,8 @@ def createMutants(maxNum, operators, types, gateIDs, locationIDs, originPath, sa
     elif "ManyQubit" in types:
         gates = QuantumGates.TwoQubit + QuantumGates.MoreThanTwoQubit
 
+
+
     # Call each operator if has been selected and with it´s mutant number
     if "Add" in operators:
         num = restquantity / len(operators)
@@ -616,6 +618,8 @@ def replace(num, gateTypes, changeGates, origin, dirPath, phases):
                             g.write(line)
                     else:
                         g.write(line)
+                else:
+                    g.write(line)
             else:
                 g.write(line)
             line = f.readline()

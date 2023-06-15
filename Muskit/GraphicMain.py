@@ -31,7 +31,7 @@ MutantCreationColumn = [
     [
         sg.Text("Select the quantum program ", font="Arial 14"),
         sg.In(size=(32, 1), enable_events=True, key="-OriginFile-"),
-        sg.FileBrowse(file_types=(("Python files",["*.py" , "*.pyc"]), ("All files","*.*")), pad=(10,20), key="-OriginFileBrowser-"),
+        sg.FilesBrowse(file_types=(("Python files",["*.py" , "*.pyc"]), ("All files","*.*")), pad=(10,20), key="-OriginFileBrowser-"),
     ],
     [
         sg.Text("Select the location to save mutants", font="Arial 14"),
@@ -132,12 +132,12 @@ while True:
     if event == "Exit" or event == sg.WIN_CLOSED:
         break
     elif event == "-OriginFile-":
-        originPath = values["-OriginFile-"]
-        if originPath != "":
-            info = functionalities.getInfo(originPath)
-            window["-GateList-"].update(disabled=False)
-            window["-GateList-"].update(info[5])
-            window["-GateList-"].update(disabled=True)
+        originPaths = values["-OriginFile-"].split(";")
+        if originPaths != "":
+            #info = functionalities.getInfo(originPath)
+            #window["-GateList-"].update(disabled=False)
+            #window["-GateList-"].update(info[5])
+            #window["-GateList-"].update(disabled=True)
             window["-MutantsSavePath-"].update(disabled=False)
             window["-MutantsSaveBrowser-"].update(disabled=False)
 
@@ -222,87 +222,89 @@ while True:
 
         window["-Create-"].update(disabled=False)
     elif event == "-Create-":
-        if all == True:
-            info = functionalities.getInfo(originPath)
-            operators= ("Add","Remove","Replace")
-            types = ("OneQubit","ManyQubit")
-            x = 1
-            gateNum = (x,)
-            while x < info[2]:
-                x = x + 1
-                gateNum = gateNum + (x,)
+        for originPath in originPaths:
+            if all == True:
+                info = functionalities.getInfo(originPath)
+                operators= ("Add","Remove","Replace")
+                types = ("OneQubit","ManyQubit")
+                x = 1
+                gateNum = (x,)
+                while x < info[2]:
+                    x = x + 1
+                    gateNum = gateNum + (x,)
 
-            x = 1
-            location = (x,)
-            while x < (info[2]+info[0]):
-                x = x + 1
-                location = location + (x,)
-            maxNum = len(QuantumGates.AllGates) * len(location) + (len(QuantumGates.AllGates) - 1) * len(gateNum) + len(gateNum)
+                x = 1
+                location = (x,)
+                while x < (info[2]+info[0]):
+                    x = x + 1
+                    location = location + (x,)
+                maxNum = len(QuantumGates.AllGates) * len(location) + (len(QuantumGates.AllGates) - 1) * len(gateNum) + len(gateNum)
 
-        else:
-            if add == True:
-                operators = ("Add",)
-                if remove == True:
-                    operators = operators + ("Remove",)
-                if replace == True:
-                    operators = operators + ("Replace",)
-            elif remove == True:
-                operators = ("Remove",)
-                if replace == True:
-                    operators = operators + ("Replace",)
-            elif replace == True:
-                operators = ("Replace",)
+            else:
+                if add == True:
+                    operators = ("Add",)
+                    if remove == True:
+                        operators = operators + ("Remove",)
+                    if replace == True:
+                        operators = operators + ("Replace",)
+                elif remove == True:
+                    operators = ("Remove",)
+                    if replace == True:
+                        operators = operators + ("Replace",)
+                elif replace == True:
+                    operators = ("Replace",)
 
-            if oneQubit == True:
-                types = ("OneQubit",)
-                if manyQubit == True:
-                    types = types + ("ManyQubit",)
-            elif manyQubit == True:
-                types = ("ManyQubit",)
+                if oneQubit == True:
+                    types = ("OneQubit",)
+                    if manyQubit == True:
+                        types = types + ("ManyQubit",)
+                elif manyQubit == True:
+                    types = ("ManyQubit",)
 
-        phases[0] = math.radians(float(generatorConfig.phases[0]))
-        for x in generatorConfig.phases[1:len(generatorConfig.phases)]:
-            phases.append(math.radians(float(x)))
+            phases[0] = math.radians(float(generatorConfig.phases[0]))
+            for x in generatorConfig.phases[1:len(generatorConfig.phases)]:
+                phases.append(math.radians(float(x)))
 
-        window["-OriginFile-"].update(disabled=True)
-        window["-OriginFileBrowser-"].update(disabled=True)
-        window["-MutantsSavePath-"].update(disabled=True)
-        window["-MutantsSaveBrowser-"].update(disabled=True)
-        window["-MaxMutants-"].update(disabled=True)
-        window["-All-"].update(disabled=True)
-        window["-Add-"].update(disabled=True)
-        window["-Remove-"].update(disabled=True)
-        window["-Replace-"].update(disabled=True)
-        window["-OneQubit-"].update(disabled=True)
-        window["-ManyQubit-"].update(disabled=True)
-        window["-GateList-"].update(disabled=True)
-        window["-Create-"].update(disabled=True)
-        window["-ExecutionFiles-"].update(disabled=True)
-        window["-ExecutionFilesBrowser-"].update(disabled=True)
-        window["-ResultsSavePath-"].update(disabled=True)
-        window["-ResultsSaveBrowser-"].update(disabled=True)
-        window["-NumShots-"].update(disabled=True)
-        window["-Execute-"].update(disabled=True)
-        window["-WarningMessage1-"].update(visible=True)
-        window.refresh()
-        functionalities.createMutants(maxNum, operators, types, gateNum, location, originPath, savePath, all, phases)
-        window["-WarningMessage1-"].update(visible=False)
-        window["-FinishMessage1-"].update(visible=True)
-        window["-OriginFile-"].update(disabled=False)
-        window["-OriginFileBrowser-"].update(disabled=False)
-        window["-MutantsSavePath-"].update(disabled=False)
-        window["-MutantsSaveBrowser-"].update(disabled=False)
-        window["-All-"].update(disabled=False)
-        window["-ExecutionFiles-"].update(disabled=False)
-        window["-ExecutionFilesBrowser-"].update(disabled=False)
-        window["-ResultsSavePath-"].update(disabled=False)
-        window["-ResultsSaveBrowser-"].update(disabled=False)
-        window["-NumShots-"].update(disabled=False)
-        window["-Execute-"].update(disabled=False)
-        window.refresh()
-        time.sleep(2)
-        window["-FinishMessage1-"].update(visible=False)
-        window.refresh()
+            window["-OriginFile-"].update(disabled=True)
+            window["-OriginFileBrowser-"].update(disabled=True)
+            window["-MutantsSavePath-"].update(disabled=True)
+            window["-MutantsSaveBrowser-"].update(disabled=True)
+            window["-MaxMutants-"].update(disabled=True)
+            window["-All-"].update(disabled=True)
+            window["-Add-"].update(disabled=True)
+            window["-Remove-"].update(disabled=True)
+            window["-Replace-"].update(disabled=True)
+            window["-OneQubit-"].update(disabled=True)
+            window["-ManyQubit-"].update(disabled=True)
+            window["-GateList-"].update(disabled=True)
+            window["-Create-"].update(disabled=True)
+            window["-ExecutionFiles-"].update(disabled=True)
+            window["-ExecutionFilesBrowser-"].update(disabled=True)
+            window["-ResultsSavePath-"].update(disabled=True)
+            window["-ResultsSaveBrowser-"].update(disabled=True)
+            window["-NumShots-"].update(disabled=True)
+            window["-Execute-"].update(disabled=True)
+            window["-WarningMessage1-"].update(visible=True)
+            window.refresh()
+
+            functionalities.createMutants(maxNum, operators, types, gateNum, location, originPath, savePath, all, phases)
+            window["-WarningMessage1-"].update(visible=False)
+            window["-FinishMessage1-"].update(visible=True)
+            window["-OriginFile-"].update(disabled=False)
+            window["-OriginFileBrowser-"].update(disabled=False)
+            window["-MutantsSavePath-"].update(disabled=False)
+            window["-MutantsSaveBrowser-"].update(disabled=False)
+            window["-All-"].update(disabled=False)
+            window["-ExecutionFiles-"].update(disabled=False)
+            window["-ExecutionFilesBrowser-"].update(disabled=False)
+            window["-ResultsSavePath-"].update(disabled=False)
+            window["-ResultsSaveBrowser-"].update(disabled=False)
+            window["-NumShots-"].update(disabled=False)
+            window["-Execute-"].update(disabled=False)
+            window.refresh()
+            time.sleep(2)
+            window["-FinishMessage1-"].update(visible=False)
+            window.refresh()
 
     elif event == "-ExecutionFiles-":
         executingFiles = values["-ExecutionFiles-"].split(";")
