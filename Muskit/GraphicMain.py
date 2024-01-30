@@ -285,6 +285,7 @@ while True:
         window["-Execute-"].update(disabled=True)
         window["-WarningMessage1-"].update(visible=True)
         window.refresh()
+
         functionalities.createMutants(maxNum, operators, types, gateNum, location, originPath, savePath, all, phases)
         window["-WarningMessage1-"].update(visible=False)
         window["-FinishMessage1-"].update(visible=True)
