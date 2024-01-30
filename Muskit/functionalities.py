@@ -128,6 +128,7 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
         if allInputs == True:
             inputs = createInputs(QubitNum)
 
+        individual_start = time.time()
         for init in inputs:
             f = open(files[x])
             g = open(tmpPath, "w")
@@ -152,13 +153,15 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
                 y = y + 1
 
             g.write("\n")
+            #g.write("import time\n")
+            #g.write("start = time.time()\n")
             #g.write("simulator = Aer.get_backend('qasm_simulator')") OLD VERSION !!!
-            g.write("simulator = AerSimulator()")
+            g.write("simulator = AerSimulator(seed_simulator=42)")
             g.write("\n")
             #g.write("job = execute(" + str(CircuitName) + ", simulator, shots=" + str(numShots) + ")")  OLD VERSION!!!
-            #g.write("compiled_circuit = transpile(" + str(CircuitName) + ", simulator)")
-            #g.write("\n")
-            g.write("job = simulator.run(" + str(CircuitName) + ", shots=" + str(numShots) + ")")
+            g.write("compiled_circuit = transpile(" + str(CircuitName) + ", simulator)")
+            g.write("\n")
+            g.write("job = simulator.run(compiled_circuit, shots=" + str(numShots) + ")")
             g.write("\n")
             # Grab results from the job
             g.write("result = job.result()")
@@ -167,6 +170,7 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
             g.write("counts = result.get_counts(" + str(CircuitName) + ")")
             g.write("\n")
             g.write("print(" + chr(34) + "The result of " + files[x] + " with input [" + str(init) +"] is: " + chr(34) + " + str(counts))")
+            #g.write("print(str(start-time.time()))\n")
             #g.write("\n")
             #g.write("r = open(r" + chr(34) + (resultPath + chr(splitChar) + "results.txt") + chr(34) + ", " + chr(34)+ "a" + chr(34)+ ")")
             #g.write("\n")
@@ -188,6 +192,7 @@ def executeMutants(files, resultPath, numShots, allInputs, inputs):
                 print("The framework is not suported for this Operating system")
             os.system(command)
             os.remove(tmpPath)
+        print("Execution time for mutant " + str(x) + " = " + str(time.time()-individual_start))
         x = x + 1
     print(" --- Execution time in seconds --- " + str(time.time() - start_time))
 
